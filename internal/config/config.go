@@ -10,9 +10,10 @@ import (
 type Provider string
 
 const (
-	ProviderOpenAI  Provider = "openai"
-	ProviderClaude  Provider = "claude"
-	ProviderGoogle  Provider = "google"
+	ProviderOpenAI     Provider = "openai"
+	ProviderClaude     Provider = "claude"
+	ProviderGoogle     Provider = "google"
+	ProviderOpenRouter Provider = "openrouter"
 )
 
 type Config struct {
@@ -90,6 +91,17 @@ func GetDefaultModel(provider Provider) string {
 		return "claude-sonnet-4-20250514"
 	case ProviderGoogle:
 		return "gemini-1.5-pro"
+	case ProviderOpenRouter:
+		return "anthropic/claude-sonnet-4-20250514"
+	default:
+		return ""
+	}
+}
+
+func GetDefaultBaseURL(provider Provider) string {
+	switch provider {
+	case ProviderOpenRouter:
+		return "https://openrouter.ai/api/v1"
 	default:
 		return ""
 	}

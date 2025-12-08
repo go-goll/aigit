@@ -18,7 +18,7 @@ const commitPromptZH = `你是一个帮助生成 git commit message 的助手。
 1. 使用约定式提交格式：<type>(<scope>): <描述>
 2. 类型：feat(新功能), fix(修复), docs(文档), style(格式), refactor(重构), test(测试), chore(杂项)
 3. 第一行保持在72个字符以内
-4. 如需要，空一行后添加更详细的描述
+4. 描述要尽可能简单
 5. 关注改了什么以及为什么改，而不是怎么改的
 6. 只输出 commit message，不要输出其他内容
 7. 使用中文描述`

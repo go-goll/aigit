@@ -19,6 +19,8 @@ func NewClient(cfg *config.Config) (Client, error) {
 		return NewClaudeClient(cfg)
 	case config.ProviderGoogle:
 		return NewGoogleClient(cfg)
+	case config.ProviderOpenRouter:
+		return NewOpenRouterClient(cfg)
 	default:
 		return NewOpenAIClient(cfg)
 	}

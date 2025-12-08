@@ -1,13 +1,16 @@
 # aigit
 
+[中文文档](./README_zh.md)
+
 AI-powered git commit message generator and code reviewer.
 
 ## Features
 
 - **AI Commit Messages**: Automatically generate meaningful commit messages based on your staged changes
 - **Code Review**: Analyze code changes for potential bugs, security issues, and code quality problems
-- **Multi-Provider Support**: Works with OpenAI (GPT-4), Claude, and Google Gemini
+- **Multi-Provider Support**: Works with OpenAI, Claude, Google Gemini, and OpenRouter
 - **Bilingual**: Supports both English and Chinese output
+- **Git Hooks**: Auto review code before commit
 
 ## Installation
 
@@ -24,10 +27,17 @@ aigit config
 ```
 
 Follow the prompts to:
-- Select your AI provider (OpenAI/Claude/Google)
+- Select your AI provider (OpenAI/Claude/Google/OpenRouter)
 - Enter your API key
 - Choose model (optional, uses default)
 - Select language (English/Chinese)
+
+**Quick setup for OpenRouter:**
+```bash
+aigit config provider openrouter
+aigit config api_key sk-or-xxx
+aigit config model anthropic/claude-sonnet-4-20250514
+```
 
 ### 2. Generate commit message
 
@@ -55,6 +65,16 @@ aigit review
 aigit review -s
 ```
 
+### 4. Install git hooks (optional)
+
+```bash
+# Install pre-commit hook for auto review
+aigit hooks install
+
+# Uninstall
+aigit hooks uninstall
+```
+
 ## Commands
 
 | Command | Description |
@@ -62,6 +82,8 @@ aigit review -s
 | `aigit config` | Configure AI provider and settings |
 | `aigit commit` | Generate commit message for staged changes |
 | `aigit review` | Review code changes for potential bugs |
+| `aigit hooks install` | Install pre-commit hook |
+| `aigit hooks uninstall` | Uninstall pre-commit hook |
 
 ### Commit Flags
 
@@ -97,6 +119,7 @@ Configuration is stored in `~/.aigit/config.json`:
 | OpenAI | gpt-4o | [OpenAI Platform](https://platform.openai.com/api-keys) |
 | Claude | claude-sonnet-4-20250514 | [Anthropic Console](https://console.anthropic.com/) |
 | Google | gemini-1.5-pro | [Google AI Studio](https://aistudio.google.com/app/apikey) |
+| OpenRouter | anthropic/claude-sonnet-4-20250514 | [OpenRouter](https://openrouter.ai/keys) |
 
 ### Custom Base URL
 

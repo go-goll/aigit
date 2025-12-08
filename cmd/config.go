@@ -21,7 +21,7 @@ Usage:
   aigit config <key> <value> # Set a specific config value
 
 Available keys:
-  provider   - AI provider (openai, claude, google)
+  provider   - AI provider (openai, claude, google, openrouter)
   api_key    - API key for the provider
   model      - Model name
   language   - Output language (en, zh)
@@ -90,8 +90,10 @@ func setConfigValue(key, value string) error {
 			cfg.Provider = config.ProviderClaude
 		case "google":
 			cfg.Provider = config.ProviderGoogle
+		case "openrouter":
+			cfg.Provider = config.ProviderOpenRouter
 		default:
-			return fmt.Errorf("invalid provider: %s (use: openai, claude, google)", value)
+			return fmt.Errorf("invalid provider: %s (use: openai, claude, google, openrouter)", value)
 		}
 	case "api_key":
 		cfg.APIKey = value
@@ -132,6 +134,7 @@ func runInteractiveConfig() error {
 	fmt.Println("  1. OpenAI (GPT-4)")
 	fmt.Println("  2. Claude (Anthropic)")
 	fmt.Println("  3. Google (Gemini)")
+	fmt.Println("  4. OpenRouter")
 
 	currentProvider := "1"
 	switch cfg.Provider {
@@ -139,6 +142,8 @@ func runInteractiveConfig() error {
 		currentProvider = "2"
 	case config.ProviderGoogle:
 		currentProvider = "3"
+	case config.ProviderOpenRouter:
+		currentProvider = "4"
 	}
 	fmt.Printf("Enter choice [%s]: ", currentProvider)
 
@@ -153,6 +158,8 @@ func runInteractiveConfig() error {
 		cfg.Provider = config.ProviderClaude
 	case "3":
 		cfg.Provider = config.ProviderGoogle
+	case "4":
+		cfg.Provider = config.ProviderOpenRouter
 	default:
 		cfg.Provider = config.ProviderOpenAI
 	}
